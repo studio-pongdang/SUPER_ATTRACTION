@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUPER ATTRACTION | STUDIO PONGDANG</title>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="is-loading">
+
+    <div id="intro-wrapper" class="intro-wrapper">
+        <div class="intro-sequence">
+            <h2 class="seq-item" id="seq-1">WELCOME</h2>
+            <h2 class="seq-item" id="seq-2"><span class="lime-text">SUPER ATTRACTION</span></h2>
+            <h2 class="seq-item" id="seq-3">DIRECTED BY FOXY</h2>
+        </div>
+        <div class="shutter shutter-top"></div>
+        <div class="shutter shutter-bottom"></div>
+    </div>
+
+    <div class="cursor"></div>
+
+    <nav id="main-nav">
+        <div class="logo">SUPER ATTRACTION</div>
+        <ul class="nav-menu">
+            <li><a href="#hero">OVERVIEW</a></li>
+            <li><a href="#universe-anchor">UNIVERSE</a></li>
+            <li><a href="#characters">CHARACTER</a></li>
+            <li><a href="#gallery">MEDIA</a></li>
+            <li><a href="#comment">DEV LOG</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+        <section id="hero" class="hero">
+            <div class="hero-center-wrapper">
+                <div class="hero-reveal-box">
+                    <h1 class="main-title">
+                        <span class="white-text">STUDIO</span><br>
+                        <span class="lime-text">PONGDANG</span>
+                    </h1>
+                </div>
+                <hr class="center-divider">
+                <div class="hero-sub-text">
+                    <p>스튜디오 퐁당의 새로운 대표님, 환영합니다.</p>
+                    <p>세 명의 축잘알 소녀들과 함께 개같이(?) 굴러 보세요!</p>
+                </div>
+                <div class="scroll-down-container">
+                    <span class="scroll-label">SCROLL</span>
+                    <div class="scroll-line-animation"></div>
+                </div>
+            </div>
+        </section>
+
+        <div id="universe-anchor" style="position: absolute; margin-top: -100px;"></div>
+
+        <section id="universe-pin-wrapper">
+            <div class="pin-container">
+                <div class="progress-track-wrapper">
+                    <div class="progress-fill-bar"></div>
+                </div>
+                <div class="horizontal-scroll-track">
+
+                    <div class="pin-panel">
+                        <div class="panel-inner">
+                            <span class="panel-num">01 / 03</span>
+                            <h2 class="panel-title">COORDINATES</h2>
+                            <hr class="panel-divider">
+
+                            <div class="bento-grid">
+                                <div class="bento-item main-loc">
+                                    <label>LOCATION HQ</label>
+                                    <h3>서울특별시 금천구 가산동<br>로이스 타워 11F 1111호</h3>
+                                    <p class="sub-text">SEOUL, GASAN DIGITAL COMPLEX</p>
+                                </div>
+                                <div class="bento-item context">
+                                    <label>NEW ERA 2024</label>
+                                    <ul>
+                                        <li>유튜브 중심 콘텐츠 산업 전성기</li>
+                                        <li>대 스타트업 창업 붐 시대</li>
+                                        <li>해외 축구 리그(PL 등) 인기 절정</li>
+                                    </ul>
+                                </div>
+                                <div class="bento-item facility">
+                                    <label>REUS TOWER FACILITIES</label>
+                                    <div class="facility-list">
+                                        <span>RF 루프탑 휴게공간</span>
+                                        <span>1F 구내식당/카페</span>
+                                        <span>B1-B4 지하주차장</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pin-panel">
+                        <div class="panel-inner">
+                            <span class="panel-num">02 / 03</span>
+                            <h2 class="panel-title">STUDIO PONGDANG</h2>
+                            <hr class="panel-divider">
+
+                            <div class="spec-grid-container">
+                                <div class="spec-column left">
+                                    <div class="spec-group">
+                                        <label class="group-label lime-text">IDENTITY & STATUS</label>
+                                        <div class="spec-item">
+                                            <span class="spec-key">FOUNDED</span>
+                                            <span class="spec-val">2023. 11 (단독 법인 설립)</span>
+                                        </div>
+                                        <div class="spec-item">
+                                            <span class="spec-key">SCALE</span>
+                                            <span class="spec-val">스타트업 / 임직원 4명</span>
+                                        </div>
+                                        <div class="spec-item">
+                                            <span class="spec-key">YOUTUBE</span>
+                                            <span class="spec-val channel-name">채널명 '퐁당파' (구독자 0명)</span>
+                                        </div>
+                                    </div>
+                                    <div class="spec-group">
+                                        <label class="group-label">OPERATION RULE</label>
+                                        <div class="spec-item compact">
+                                            <span class="spec-key">TIME</span>
+                                            <span class="spec-val">10:00-19:00 (점심 12:00-13:00)</span>
+                                        </div>
+                                        <div class="spec-item compact">
+                                            <span class="spec-key">DRESS</span>
+                                            <span class="spec-val">잠옷 제외 자유 복장</span>
+                                        </div>
+                                        <div class="spec-item compact">
+                                            <span class="spec-key">TEAM</span>
+                                            <span class="spec-val">전원 사원 (호칭: 이름+님)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="spec-column right">
+                                    <div class="spec-group infrastructure">
+                                        <label class="group-label">INFRASTRUCTURE (1111호, 25평)</label>
+                                        <div class="zone-map">
+                                            <span>오픈 오피스</span>
+                                            <span>회의실</span>
+                                            <span>촬영/편집 부스</span>
+                                            <span>간이 휴게공간</span>
+                                        </div>
+                                        <div class="gear-list">
+                                            <p>▶ 카메라 2대, 조명 장비 SET</p>
+                                            <p>▶ 고성능 편집 PC 3대, 회의용 모니터</p>
+                                        </div>
+                                    </div>
+                                    <div class="spec-group content-dir">
+                                        <label class="group-label">CONTENT DIRECTION</label>
+                                        <div class="tag-cloud">
+                                            <span>#축구전술분석</span>
+                                            <span>#해외리그리뷰</span>
+                                            <span>#축구밈_패러디</span>
+                                            <span>#숏폼</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pin-panel">
+                        <div class="panel-inner intro-layout">
+                            <span class="panel-num">03 / 03</span>
+
+                            <p class="intro-sub-top">SEOUL, 2024. 01. 02. AM 10:00</p>
+
+                            <h2 class="panel-title intro-title">
+                                가산디지털단지 로이스 타워<br>
+                                <span class="lime-text">ROOM 1111</span>
+                            </h2>
+
+                            <hr class="panel-divider">
+
+                            <div class="intro-text-box">
+                                <p>
+                                    유리문 투과율 테스트(물리)를 마친 뚝딱이 기획자가 안경을 고쳐 씁니다.<br>
+                                    배 잡고 구르는 텐션 과잉 편집자와 헤드셋 낀 채 출입 거부당한 쿨뷰티 막내까지!
+                                </p>
+                                <p>
+                                    이런 애들만 골라 뽑은 당신은... 안목이 대단한 걸까요, 아니면 같이 미쳐가는 걸까요?<br>
+                                    장비는 국가대표, 구독자는 0명, 하지만 서로를 향한 드립력은 이미 월드클래스!
+                                </p>
+                                <p>
+                                    정신 차려보니 이미 이 대환장 파티에 <span class="lime-text">퐁당</span> 발을 담가버린 당신의 출근길.<br>
+                                    문이 열리네요, 당신이 들어오죠... 아니, 당신이 문을 열어줘야 얘들이 들어올 수 있습니다.
+                                </p>
+                            </div>
+
+                            <div class="intro-tags">
+                                <div class="tag-badge">
+                                    <span class="tag-head">GENRE</span>
+                                    <span class="tag-body">OFFICE LOVE SIMULATION</span>
+                                </div>
+                                <div class="tag-badge">
+                                    <span class="tag-head">DANGER</span>
+                                    <span class="tag-body">3 SCARY LADIES</span>
+                                </div>
+                                <div class="tag-badge">
+                                    <span class="tag-head">QUEST</span>
+                                    <span class="tag-body">WORLD DOMINATION</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+
+        <section id="characters">
+            <div class="container char-container">
+                <h2 class="section-label">02. SQUAD</h2>
+                <hr class="section-divider">
+
+                <div class="char-accordion">
+
+                    <div class="char-card" id="char-minju">
+                        <div class="char-bg"></div>
+                        <div class="char-content">
+                            <div class="char-header">
+                                <span class="char-role">CONTENT PLANNER</span>
+
+                                <h3 class="char-name-ko">김민주</h3>
+                                <span class="char-name-en">Kim Min-ju</span>
+
+                                <div class="char-tags">
+                                    <span>#ISTJ</span>
+                                    <span>#Dortmund</span>
+                                    <span>#Analytic</span>
+                                </div>
+                            </div>
+                            <div class="char-body">
+                                <p class="char-quote">"특별히 할 말은 없는데요...<br>아, 전술 배치 이야기라면 다릅니다."</p>
+                                <ul class="char-specs">
+                                    <li><strong>PROFILE</strong> 27세 / Female</li>
+                                    <li><strong>STYLE</strong> 173cm, Black Bayonetta Glasses</li>
+                                    <li><strong>TRAIT</strong> 쿨한 외면 vs 축구 덕후 (Gap-moe)</li>
+                                    <li><strong>FANDOM</strong> 도르트문트 (Dortmund)</li>
+                                    <li><strong>BIAS</strong> 니코 슐로터베크</li>
+                                </ul>
+                                <p class="char-desc">
+                                    클롭의 게겐프레싱에 반해 인생을 바친 기획자.<br>
+                                    평소엔 차가운 AI 같지만, 전술 얘기만 나오면 급발진하는 반전 매력의 소유자.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="char-card" id="char-yukyeong">
+                        <div class="char-bg"></div>
+                        <div class="char-content">
+                            <div class="char-header">
+                                <span class="char-role">MAIN EDITOR</span>
+                                <h3 class="char-name-ko">채유경</h3>
+                                <span class="char-name-en">Chae Yu-kyeong</span>
+                                <div class="char-tags">
+                                    <span>#ENFP</span>
+                                    <span>#ManUtd</span>
+                                    <span>#MoodMaker</span>
+                                </div>
+                            </div>
+                            <div class="char-body">
+                                <p class="char-quote">"대박! 이거 완전 좋은데요?<br>저만 믿고 가시죠, 에이~ 설마!"</p>
+                                <ul class="char-specs">
+                                    <li><strong>PROFILE</strong> 26세 / Female</li>
+                                    <li><strong>STYLE</strong> 163cm, Blonde Bob-cut</li>
+                                    <li><strong>TRAIT</strong> 확신의 개그캐, 삐지면 입 삐죽</li>
+                                    <li><strong>FANDOM</strong> 맨체스터 유나이티드 (Man Utd)</li>
+                                    <li><strong>BIAS</strong> 코비 마이누</li>
+                                </ul>
+                                <p class="char-desc">
+                                    박지성 보고 자란 '해버지' 세대의 감성 편집자.<br>
+                                    팀의 텐션을 책임지는 분위기 메이커이자, 맹구 소리에 울컥하는 열혈 팬.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="char-card" id="char-chaeeun">
+                        <div class="char-bg"></div>
+                        <div class="char-content">
+                            <div class="char-header">
+                                <span class="char-role">VISUAL SPECIALIST</span>
+                                <h3 class="char-name-ko">이채은</h3>
+                                <span class="char-name-en">Lee Chae-eun</span>
+                                <div class="char-tags">
+                                    <span>#ENTP</span>
+                                    <span>#RealMadrid</span>
+                                    <span>#CoolBeauty</span>
+                                </div>
+                            </div>
+                            <div class="char-body">
+                                <p class="char-quote">"이거 ㄹㅇ 별로인데요?<br>ㅇㅋ, 지금 바로 수정할게요."</p>
+                                <ul class="char-specs">
+                                    <li><strong>PROFILE</strong> 24세 / Female</li>
+                                    <li><strong>STYLE</strong> 175cm, Blue Ponytail, Headset</li>
+                                    <li><strong>TRAIT</strong> 팩트폭격기, MZ 알파걸</li>
+                                    <li><strong>FANDOM</strong> 레알 마드리드 (Real Madrid)</li>
+                                    <li><strong>BIAS</strong> 주드 벨링엄</li>
+                                </ul>
+                                <p class="char-desc">
+                                    호날두 유니폼 핏에 반해 입덕한 비주얼 천재.<br>
+                                    꼰대 문화를 혐오하며, 트렌디한 감각으로 영상을 살려내는 금손 막내.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="container media-container">
+                <h2 class="section-label">03. MEDIA</h2>
+                <hr class="section-divider">
+
+                <div class="media-filters">
+                    <button class="filter-btn active" data-filter="all">ALL</button>
+                    <button class="filter-btn" data-filter="minju">김민주</button>
+                    <button class="filter-btn" data-filter="yukyeong">채유경</button>
+                    <button class="filter-btn" data-filter="chaeeun">이채은</button>
+                    <button class="filter-btn" data-filter="thumb">썸네일</button>
+
+                    <button class="filter-btn reset-btn" id="reset-filter">↻</button>
+                </div>
+
+                <div class="media-slider">
+
+                    <div class="media-item minju">
+                        <div class="media-overlay">
+                            <span>김민주 #01</span>
+                        </div>
+                        <img src="minju_01.png" alt="Minju 1">
+                    </div>
+
+                    <div class="media-item minju">
+                        <div class="media-overlay">
+                            <span>김민주 #02</span>
+                        </div>
+                        <img src="minju_02.png" alt="Minju 2">
+                    </div>
+
+
+                    <div class="media-item yukyeong">
+                        <div class="media-overlay">
+                            <span>채유경 #01</span>
+                        </div>
+                        <img src="yukyeong_01.png" alt="Yukyeong 1">
+                    </div>
+
+                    <div class="media-item yukyeong">
+                        <div class="media-overlay">
+                            <span>채유경 #02</span>
+                        </div>
+                        <img src="yukyeong_02.png" alt="Yukyeong 2">
+                    </div>
+
+
+                    <div class="media-item chaeeun">
+                        <div class="media-overlay">
+                            <span>이채은 #01</span>
+                        </div>
+                        <img src="chaeeun_01.png" alt="Chaeeun 1">
+                    </div>
+
+                    <div class="media-item chaeeun">
+                        <div class="media-overlay">
+                            <span>이채은 #02</span>
+                        </div>
+                        <img src="chaeeun_02.png" alt="Chaeeun 2">
+                    </div>
+
+
+                    <div class="media-item thumb">
+                        <div class="media-overlay">
+                            <span>썸네일 #01</span>
+                        </div>
+                        <img src="thumb_01.jpg" alt="Thumbnail 1">
+                    </div>
+
+                    <div class="media-item thumb">
+                        <div class="media-overlay">
+                            <span>썸네일 #02</span>
+                        </div>
+                        <img src="thumb_02.jpg" alt="Thumbnail 2">
+                    </div>
+
+                    <p class="scroll-hint">← DRAG & SCROLL →</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="comment">
+            <div class="container comment-container">
+                <h2 class="section-label">04. DEV LOG</h2>
+                <hr class="section-divider">
+
+                <div class="comment-tabs">
+                    <button class="tab-btn active" data-tab="story">EPISODE</button>
+                    <button class="tab-btn" data-tab="qna">Q&A</button>
+                    <button class="tab-btn" data-tab="notice">NOTICE</button>
+                </div>
+
+                <div class="comment-body">
+
+                    <div id="tab-story" class="tab-content active">
+                        <h3 class="tab-title">제작자 <span class="lime-text">FOXY의 기록</span></h3>
+
+                        <div class="text-scroll-box">
+                            <div class="message-box"
+                                style="border:none; padding:0; text-align: left; background: transparent;">
+                                <p class="msg-text" style="text-align: left; white-space: pre-line; color: #ccc;">
+                                    안녕하세요! 첫 작품으로 인사드리는 <strong>[FOXY]</strong>입니다! 😃
+                                    현재 백수 디자이너고.. 최근에 AI 짤뽑이나 프롬프트에 대해 공부하고 있어요. 😭
+                                    <br>
+                                    매 번 유저노트와 씨름하다가 제가 플레이하고 싶어서 제작에 관심을 갖게 되었습니다.
+                                    (솔직히 2,000자 너무 적어요.. 그런데 직접 제작해보니까 프롬칸도 너무 적어요..)
+                                    <br>
+                                    제목은 아일릿의 Magnetic에서 따왔습니다. 우연하게 가사를 보는 순간, 이거다 싶었어요.
+                                    장르는 <strong>❤️현실 오피스 로맨스❤️</strong> 이고, 콘텐츠 관련 지식이나 축구 지식이 많으시면 더 재미있을거예요.
+                                    <br>
+                                    <span
+                                        style="color: #fff; background: rgba(207, 255, 4, 0.2); padding: 2px 5px; border-radius: 4px; white-space: nowrap;">🌟호감도가
+                                        90을 넘어가면, 먼저 고백..할지도!?🌟</span>
+                                    <br>
+                                    현실 오피스라는 부분에 디테일 신경 쓰느라 고민들이 많았어요.
+                                    규모나 위치, 업무 시간 등.. 최근 젊은 기업들의 동향을 파악하는데 시간을 좀 쓴 것 같습니다!
+                                    <br>
+                                    첫 제작이라 부족한 점이 많고, 고쳐나가야 할 점도 매우 많습니다.
+                                    각종 커뮤니티를 돌아다니면서 짧게 배운 지식이기에 가볍게 즐긴다고 생각해주세요!
+                                    <br>
+                                    감사합니다!🌈
+                                </p>
+
+                                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed #444;">
+                                    <span style="font-size: 0.85rem; color: #777; display: block; line-height: 1.6;">
+                                        🚫 작품에 반영되는 모든 캐릭터 설정 및 세계관은 ‘현실’과 무관합니다! 방문하셔도 아무것도 없어요 🚫<br>
+                                        ⏰ 작업 기간 l 2025.01.02 - 01.11 ing
+                                        ℹ️ 📷18장 l ♀️3명 l 📙프로챗 1.0 l 📖출력량 1.5x ℹ️
+                                        ❗유튜브 명령어 사용 시에는 잠깐 3x로 변경해서 출력해주세요! (짤림 방지)
+                                    </span>
+                                    <div style="margin-top: 15px; font-weight: 700; color: #555; letter-spacing: 2px;">
+                                        FROM. FOXY
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-qna" class="tab-content">
+                        <h3 class="tab-title">자주 묻는 <span class="lime-text">질문들</span></h3>
+                        <div class="qna-list">
+
+                            <div class="qna-item">
+                                <div class="q-box"><span class="q-mark">Q.</span> 왜 시작 시점이 2024년 1월 2일인가요?</div>
+                                <div class="a-box">AI 학습 데이터가 많이 늦습니다. 예시로, 로이스를 도르트문트 소속으로 알고 있어요.. (실제로는 24년 8월 LA갤럭시
+                                    이적)<br>
+                                    몰입감 하락 방지를 위해 이미 알고 있는 결과로 이어나갈 생각입니다. 너른 양해 부탁드립니다.<br>
+                                    시작 시점 상 23-24시즌 후반기 진행 중이네요. 레버쿠젠의 무패 우승 시즌이죠!
+                                </div>
+                            </div>
+
+                            <div class="qna-item">
+                                <div class="q-box"><span class="q-mark">Q.</span> 호감도 수치가 한 번에 너무 많이 올랐어요!</div>
+                                <div class="a-box"> 호감도는 정말 고민을 많이 했습니다. 이런저런 프롬을 다 써보고 자체적으로 응용해봐도 못 알아 듣네요.<br>
+                                    최종적으로는 ‘직접수정’이 해답이었습니다.<br>
+                                    턴 당 상한선을 3으로 잡아두긴 했는데, 입맛에 맞게 수정하셔도 무관합니다! </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="tab-notice" class="tab-content">
+                        <h3 class="tab-title">제작자의 작은 <span class="lime-text">TIP & 사과 방송</span></h3>
+
+                        <div class="message-box" style="text-align: left;">
+                            <div style="margin-bottom: 30px;">
+                                <h4 style="color: #fff; font-size: 1.2rem; margin-bottom: 10px;">
+                                    📝 유저노트 활용을 적극 추천할게요.
+                                </h4>
+                                <p style="color: #aaa; line-height: 1.6;">
+                                    ex) 식대 지급 여부나 여러분만의 직원 등의 <strong
+                                        style="color: #fff; text-decoration: underline; text-decoration-color: var(--main-color);">디테일
+                                        및 설정</strong>을 추가하시면 몰입도가 올라갈 거예요.
+                                </p>
+                                <p style="color: #666; font-size: 0.9rem; margin-top: 5px; font-style: italic;">
+                                    (프롬칸이 적어서 못 넣은건 안 비밀.. 🤫)
+                                </p>
+                            </div>
+
+                            <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
+
+                            <div>
+                                <h4 style="color: #ff5555; font-size: 1.2rem; margin-bottom: 10px;">
+                                    ⛔ 실축 정보 오류는.. 죄송합니다.
+                                </h4>
+                                <p style="color: #aaa; line-height: 1.6;">
+                                    이게 제가 어떻게 할 수 있는 부분이 아닌 <strong style="color: #fff;">AI 모델의 한계</strong>라, 유저노트에 정보
+                                    잡아주시면서 하시는 걸 강추드립니다! 😭
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        </div>
+
+        </div>
+        </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+
+    <audio id="bgm-audio" loop>
+        <source src="magnetic.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="bgm-controller">
+        <button id="bgm-toggle" class="bgm-btn">
+            <div class="vinyl-icon">
+                <div class="vinyl-center"></div>
+            </div>
+            <span class="music-note">🎵</span>
+        </button>
+        <span class="bgm-label">MAGNETIC</span>
+    </div>
+</body>
+
+</html>

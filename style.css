@@ -1,0 +1,1431 @@
+:root {
+    --main-color: #cfff04;
+    --bg-color: #0a0a0a;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--white);
+    font-family: 'Pretendard', sans-serif;
+    overflow-x: hidden;
+}
+
+/* [인트로 복구] 텍스트가 안 나오는 현상 해결 */
+.intro-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shutter {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50.5%;
+    background: #000;
+    z-index: 10001;
+    /* 텍스트보다 뒤에 위치 */
+    transition: transform 1.5s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.shutter-top {
+    top: 0;
+}
+
+.shutter-bottom {
+    bottom: 0;
+}
+
+.intro-wrapper.open .shutter-top {
+    transform: translateY(-100%);
+}
+
+.intro-wrapper.open .shutter-bottom {
+    transform: translateY(100%);
+}
+
+.intro-sequence {
+    position: relative;
+    z-index: 10002;
+    /* 셔터보다 높게 설정 */
+    text-align: center;
+    width: 100%;
+}
+
+.seq-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s ease;
+}
+
+/* [1번 수정] 메인 로고 - 더 크고 웅장하게 */
+.logo {
+    font-size: 1.4rem;
+    font-weight: 950;
+    color: var(--main-color);
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+/* [2번 수정] 네비게이션 복구 및 호버 인터랙션 */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 1.2s 1.5s;
+}
+
+nav.active {
+    opacity: 1;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+
+.nav-menu a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 750;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--main-color);
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--main-color);
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+/* [복구] 섹션 및 Hero 정렬 */
+section {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero {
+    text-align: center;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: 2s ease;
+}
+
+.hero.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.hero-center-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-title {
+    font-size: clamp(5rem, 15vw, 11rem);
+    font-weight: 900;
+    line-height: 0.85;
+    margin-bottom: 25px;
+}
+
+.lime-text {
+    color: var(--main-color);
+}
+
+.center-divider {
+    border: 0;
+    height: 1px;
+    background: var(--white);
+    margin: 40px auto;
+    width: 150px;
+    opacity: 0.4;
+}
+
+/* [복구] 스크롤 애니메이션 */
+.scroll-down-container {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.scroll-label {
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 5px;
+    color: var(--main-color);
+}
+
+.scroll-line-animation {
+    width: 1px;
+    height: 65px;
+    background: rgba(207, 255, 4, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.scroll-line-animation::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--main-color);
+    animation: scrollLine 2s infinite;
+}
+
+@keyframes scrollLine {
+    0% {
+        top: -100%;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+/* 본문 섹션 구조 복구 */
+.sub-section {
+    padding: 150px 0;
+    display: block;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.section-label {
+    color: var(--main-color);
+    font-size: 1rem;
+    font-weight: 900;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.section-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 60px;
+}
+
+.description {
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.35;
+    text-align: left;
+}
+
+/* 캐릭터/미디어 카드 복구 */
+.char-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.char-card {
+    border: 1px solid #333;
+    padding: 45px;
+    transition: 0.4s;
+}
+
+.char-card:hover {
+    border-color: var(--main-color);
+}
+
+.char-img {
+    height: 400px;
+    background: #1a1a1a;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    color: #333;
+}
+
+.media-flex {
+    display: flex;
+    gap: 25px;
+    height: 650px;
+}
+
+.media-item {
+    background: #1a1a1a;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-item.big {
+    flex: 2;
+    background: var(--main-color);
+    color: #000;
+    font-weight: 950;
+}
+
+.media-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.cursor {
+    width: 10px;
+    height: 10px;
+    background: var(--main-color);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 999999 !important;
+    pointer-events: none;
+    mix-blend-mode: difference;
+}
+
+/* [Universe Pinning Section] */
+#universe-pin-wrapper {
+    /* [핵심 수정] 글로벌 section의 flex 중앙 정렬 무력화 */
+    display: block !important;
+
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+}
+
+.horizontal-scroll-track {
+    display: flex;
+    /* 3페이지 길이 확보 */
+    width: 300vw;
+    height: 100%;
+
+    /* [핵심 수정] 왼쪽 정렬 강제 (혹시 모를 마진 제거) */
+    margin: 0;
+    padding: 0;
+    justify-content: flex-start;
+
+    will-change: transform;
+}
+
+.pin-panel {
+    width: 100vw;
+    height: 100vh;
+
+    /* 패널 찌그러짐 방지 */
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+
+    /* ★ 핵심 수정: 중앙 정렬(center)을 끄고 위쪽 정렬(flex-start)로 변경 */
+    align-items: flex-start;
+
+    /* ★ 위에서부터 얼마나 띄울지 결정 (이 값으로 높이를 통일시킵니다) */
+    padding-top: 220px;
+
+    box-sizing: border-box;
+}
+
+/* (이하 내부 디자인은 동일하게 유지) */
+.panel-inner {
+    width: 100%;
+    max-width: 1200px;
+    text-align: left;
+}
+
+.panel-num {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--main-color);
+    letter-spacing: 2px;
+}
+
+.panel-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    margin: 20px 0;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.panel-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-bottom: 50px;
+}
+
+/* [새로운 레이아웃 스타일 추가] */
+
+/* --- Page 01: Bento Grid Style --- */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    /* 왼쪽을 더 넓게 */
+    grid-template-rows: auto auto;
+    gap: 25px;
+    height: 100%;
+}
+
+.bento-item {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 35px;
+    background: rgba(255, 255, 255, 0.02);
+    /* 아주 살짝 밝게 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bento-item label {
+    font-size: 0.75rem;
+    color: var(--main-color);
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* 위치 정보 강조 */
+.main-loc {
+    grid-row: span 2;
+    /* 세로로 2칸 차지 */
+}
+
+.main-loc h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+.main-loc .sub-text {
+    color: #888;
+    font-weight: 600;
+}
+
+/* 시대 배경 리스트 */
+.context ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.context li {
+    margin-bottom: 8px;
+    font-weight: 500;
+    position: relative;
+}
+
+.context li::before {
+    content: '-';
+    color: var(--main-color);
+    position: absolute;
+    left: -15px;
+}
+
+/* 시설 정보 태그 */
+.facility-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.facility-list span {
+    font-size: 0.8rem;
+    border: 1px solid #444;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #ccc;
+}
+
+
+/* --- Page 02: Spec Grid Style --- */
+.spec-grid-container {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.spec-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.group-label {
+    font-size: 0.9rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    display: block;
+    letter-spacing: 0.5px;
+}
+
+.lime-text {
+    color: var(--main-color);
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 0;
+    font-size: 1rem;
+}
+
+.spec-item.compact {
+    padding: 8px 0;
+    font-size: 0.9rem;
+}
+
+/* 조금 더 조밀하게 */
+
+.spec-key {
+    font-weight: 700;
+    color: #888;
+}
+
+.spec-val {
+    font-weight: 500;
+    text-align: right;
+}
+
+.channel-name {
+    color: var(--main-color);
+    font-weight: 800;
+}
+
+/* 인프라 영역 스타일 */
+.infrastructure {
+    background: rgba(207, 255, 4, 0.05);
+    padding: 30px;
+    border: 1px solid var(--main-color);
+}
+
+.zone-map {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.zone-map span {
+    background: var(--main-color);
+    color: #000;
+    font-weight: 800;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+}
+
+.gear-list p {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+/* 콘텐츠 태그 스타일 */
+.tag-cloud {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tag-cloud span {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.info-item label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--main-color);
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.info-item p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.intro-story .story-main {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+.story-footer span {
+    font-size: 0.7rem;
+    font-weight: 900;
+    padding: 8px 15px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #666;
+    margin-right: 10px;
+}
+
+/* 진행 바 전체 틀 (회색 배경) */
+.progress-track-wrapper {
+    position: absolute;
+    /* ★ 기존 180px -> 160px로 올려서 제목과 간격을 벌립니다 */
+    top: 160px;
+
+    left: 10%;
+    /* 좌측 여백은 본문과 동일하게 유지 */
+    /* width는 1페이지 벤토 그리드 너비와 비슷하게 맞추면 예쁩니다 (약 70~80%) */
+    width: 70%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    z-index: 50;
+}
+
+/* 채워지는 막대 (라임색) */
+.progress-fill-bar {
+    width: 0%;
+    /* 처음엔 0%에서 시작 */
+    height: 100%;
+    background: var(--main-color);
+    /* 라임색 */
+    box-shadow: 0 0 10px var(--main-color);
+    /* 살짝 빛나는 네온 효과 */
+}
+
+/* [3페이지 전용 스타일: Narrative Layout] */
+
+/* 상단 작은 텍스트 */
+.intro-sub-top {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    /* 은은한 회색 */
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    font-family: monospace;
+    /* 타자기 느낌 폰트 */
+}
+
+/* 메인 타이틀 줄간격 조정 */
+.intro-title {
+    line-height: 1.1;
+    /* 줄 간격을 좁혀서 덩어리감 있게 */
+    margin-top: 0;
+    /* 위쪽 여백 제거 (sub-top과 붙이기 위해) */
+}
+
+/* 본문 텍스트 박스 */
+.intro-text-box p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    /* 가독성 좋은 줄간격 */
+    color: #e0e0e0;
+    font-weight: 500;
+    margin-bottom: 40px;
+    /* 문단 사이 넓게 띄우기 (2줄 단위 구분) */
+    word-break: keep-all;
+    /* 한글 단어 끊김 방지 */
+}
+
+/* 태그 컨테이너 */
+.intro-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    /* 태그 사이 간격 */
+    margin-top: 10px;
+}
+
+/* 개별 태그 디자인 */
+.tag-badge {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 50px;
+    /* 둥근 알약 모양 */
+    background: rgba(0, 0, 0, 0.3);
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+/* 태그 호버 효과 (마우스 올리면 라임색) */
+.tag-badge:hover {
+    border-color: var(--main-color);
+    box-shadow: 0 0 10px rgba(207, 255, 4, 0.2);
+    transform: translateY(-2px);
+}
+
+/* 태그 앞부분 (GENRE, DANGER...) */
+.tag-head {
+    color: var(--main-color);
+    font-weight: 900;
+}
+
+/* 태그 구분선 (|) */
+.tag-head::after {
+    content: '|';
+    margin-left: 10px;
+    color: #444;
+    font-weight: 300;
+}
+
+/* 태그 뒷부분 내용 */
+.tag-body {
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+/* [Character Section: Interactive Accordion] */
+
+#characters {
+    /* 화면 전체를 꽉 채우는 섹션 */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: #0a0a0a;
+    position: relative;
+    overflow: hidden;
+    /* 내용 넘침 방지 */
+}
+
+.char-container {
+    width: 100%;
+    height: 80vh;
+    /* 화면의 80% 높이 사용 */
+    display: flex;
+    flex-direction: column;
+}
+
+.char-accordion {
+    display: flex;
+    /* 가로 배치 */
+    width: 100%;
+    height: 100%;
+    gap: 2px;
+    /* 카드 사이 얇은 간격 */
+    margin-top: 30px;
+}
+
+/* 개별 캐릭터 카드 */
+.char-card {
+    flex: 1;
+    /* 기본 너비: 1:1:1 */
+    position: relative;
+    background: #111;
+    border: 1px solid #333;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    /* 부드러운 늘어남 */
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* 캐릭터 배경 (나중에 이미지 들어갈 곳) */
+.char-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    transition: opacity 0.5s;
+}
+
+/* [추가] 캐릭터별 배경 이미지 설정 */
+/* 공통 설정: 그라데이션 + 이미지 결합, 꽉 차게, 중앙 정렬 */
+#char-minju .char-bg,
+#char-yukyeong .char-bg,
+#char-chaeeun .char-bg {
+    background-size: cover;
+    background-position: center top;
+    /* 캐릭터 얼굴 위주로 보이게 상단 정렬 */
+    background-repeat: no-repeat;
+}
+
+/* 1. 김민주 (ISTJ, 도르트문트) */
+#char-minju .char-bg {
+    /* 문법: background: [그라데이션(위)], [이미지(아래)]; */
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.95) 80%),
+        url('01.png');
+    /* <--- 경로 수정 필수! */
+}
+
+/* 2. 채유경 (ENFP, 맨유) */
+#char-yukyeong .char-bg {
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.95) 80%),
+        url('04.png');
+    /* <--- 경로 수정 필수! */
+}
+
+/* 3. 이채은 (ENTP, 레알) */
+#char-chaeeun .char-bg {
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.95) 80%),
+        url('07.png');
+    /* <--- 경로 수정 필수! */
+}
+
+/* 마우스 올렸을 때 효과 */
+.char-card:hover {
+    flex: 2.5;
+    /* 너비가 2.5배로 늘어남 */
+    border-color: var(--main-color);
+    /* 테두리 라임색 */
+}
+
+/* 다른 카드에 마우스 올렸을 때 나는 흐려짐 */
+.char-accordion:hover .char-card:not(:hover) {
+    opacity: 0.5;
+    /* 비활성 카드 어둡게 */
+}
+
+/* 텍스트 내용 래퍼 */
+.char-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* 상단 정보 (항상 보임) */
+.char-role {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--main-color);
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* [이름 디자인 수정: 한글 메인 + 영문 서브] */
+
+/* 1. 한글 이름 (크고 웅장하게) */
+.char-name-ko {
+    font-size: 3.5rem;
+    /* 기존 영문 크기와 동일하게 유지 */
+    font-weight: 900;
+    /* 아주 굵게 */
+    color: #fff;
+    /* 흰색 */
+    line-height: 1.1;
+    /* 줄 간격 */
+    margin-top: 10px;
+    /* 위쪽 역할(ROLE)과의 간격 */
+    margin-bottom: 5px;
+    /* 아래쪽 영문 이름과의 간격 */
+    letter-spacing: -1px;
+    /* 한글은 자간을 살짝 좁혀야 단단해 보임 */
+}
+
+/* 2. 영문 이름 (작고 세련되게) */
+.char-name-en {
+    display: block;
+    /* 줄바꿈 */
+    font-size: 1.1rem;
+    /* 작게 */
+    color: rgba(255, 255, 255, 0.6);
+    /* 은은한 회색 (흰색보다 어둡게 해서 위계 조정) */
+    font-weight: 500;
+    text-transform: uppercase;
+    /* 대문자로 변환 (KIM MIN-JU) */
+    letter-spacing: 1px;
+    /* 자간을 넓혀서 시원하게 */
+    margin-bottom: 25px;
+    /* 태그와의 간격 */
+    font-family: sans-serif;
+    /* 깔끔한 고딕 계열 */
+}
+
+.char-tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* [수정] 캐릭터 태그 스타일 (가독성 UP 버전) */
+.char-tags span {
+    /* 1. 배경을 진한 반투명 검정으로 깔아서 글자를 팝업시킴 */
+    background: rgba(0, 0, 0, 0.7);
+
+    /* 2. (선택사항) 뒤에 있는 이미지를 흐리게 만들어 글자에 집중시킴 (최신 브라우저용) */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    /* 3. 테두리는 유지하되 조금 더 밝고 투명하게 */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    /* 4. 텍스트 가독성 확보 */
+    color: #fff;
+    /* 완전 흰색 */
+    font-weight: 700;
+    /* 굵게 */
+    font-size: 0.85rem;
+    /* 기존보다 아주 살짝 키움 */
+    letter-spacing: 0.5px;
+
+    /* 5. 형태와 여백 */
+    padding: 6px 16px;
+    /* 내부 여백을 늘려 넉넉하게 */
+    border-radius: 50px;
+    /* 둥근 캡슐 모양 */
+
+    /* 6. 입체감 추가 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* 상세 정보 (평소엔 숨김 -> 호버 시 나타남) */
+.char-body {
+    max-height: 0;
+    /* 높이 0으로 숨김 */
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    /* 서서히 나타남 */
+    transform: translateY(20px);
+}
+
+.char-card:hover .char-body {
+    max-height: 500px;
+    /* 충분한 높이로 열림 */
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 20px;
+    /* 이름과의 간격 */
+}
+
+/* 대사 및 스펙 스타일 */
+.char-quote {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 25px;
+    padding-left: 15px;
+    border-left: 3px solid var(--main-color);
+    transition: all 0.5s ease;
+    /* 멘트 바뀔 때 부드럽게 */
+    position: relative;
+}
+
+.char-specs {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.char-specs li {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: #ccc;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 5px;
+}
+
+.char-specs strong {
+    color: var(--main-color);
+    margin-right: 10px;
+    font-weight: 800;
+}
+
+.char-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #999;
+}
+
+/* [BGM Controller Style] */
+.bgm-controller {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99999;
+    /* 제일 위에 뜨도록 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.bgm-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    position: relative;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* LP판 디자인 */
+.vinyl-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: repeating-radial-gradient(#111 0,
+            #111 2px,
+            #222 3px,
+            #222 4px);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.vinyl-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: var(--main-color);
+    /* 라임색 센터 */
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+
+.music-note {
+    position: relative;
+    z-index: 10;
+    font-size: 1.2rem;
+    filter: drop-shadow(0 0 2px #000);
+}
+
+/* 노래 제목 라벨 */
+.bgm-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #666;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+/* [재생 중일 때 효과] */
+/* 1. 버튼 테두리가 라임색으로 빛남 */
+.bgm-btn.playing {
+    border-color: var(--main-color);
+    box-shadow: 0 0 15px rgba(207, 255, 4, 0.4);
+}
+
+/* 2. LP판이 빙글빙글 돌아감 */
+.bgm-btn.playing .vinyl-icon {
+    animation: spinVinyl 3s linear infinite;
+}
+
+/* 3. 라벨도 라임색으로 */
+.bgm-controller:hover .bgm-label,
+.bgm-btn.playing+.bgm-label {
+    color: var(--main-color);
+}
+
+/* 회전 애니메이션 정의 */
+@keyframes spinVinyl {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* [MEDIA Section Style] */
+#gallery {
+    min-height: 100vh;
+    padding: 100px 0;
+    background: #050505;
+}
+
+.media-container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* 필터 버튼 영역 */
+.media-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid #444;
+    color: #888;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.filter-btn:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+/* 선택된 버튼 스타일 (라임색) */
+.filter-btn.active {
+    background: var(--main-color);
+    border-color: var(--main-color);
+    color: #000;
+    box-shadow: 0 0 15px rgba(207, 255, 4, 0.4);
+}
+
+/* [MEDIA Section: Horizontal Slider Layout] */
+
+/* (기존 #gallery, .media-container, .media-filters 스타일은 유지하세요) */
+
+/* [핵심 변경] 그리드 대신 플렉스(가로 배치) 사용 */
+.media-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    /* 가로 스크롤 허용 */
+    padding: 20px 5px;
+    /* 그림자 잘리지 않게 여백 */
+    scroll-behavior: smooth;
+    /* 부드러운 스크롤 */
+
+    /* 스크롤바 숨기기 (디자인 깔끔하게) */
+    -ms-overflow-style: none;
+    /* IE, Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* 크롬, 사파리 스크롤바 숨기기 */
+.media-slider::-webkit-scrollbar {
+    display: none;
+}
+
+/* 개별 이미지 카드 스타일 수정 */
+.media-item {
+    /* [중요] 너비를 고정합니다. (300px ~ 400px 추천) */
+    min-width: 320px;
+    height: 450px;
+    /* 높이도 고정해서 통일감 주기 */
+
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #111;
+    border: 1px solid #222;
+    flex-shrink: 0;
+    /* 공간 좁아도 찌그러지지 않게 방지 */
+    transition: transform 0.3s ease, border-color 0.3s;
+}
+
+/* 이미지 꽉 채우기 */
+.media-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 비율 유지하며 꽉 채우기 */
+    transition: transform 0.5s ease;
+}
+
+/* 호버 효과 */
+.media-item:hover {
+    border-color: var(--main-color);
+    transform: translateY(-5px);
+    /* 살짝 위로 뜸 */
+}
+
+.media-item:hover img {
+    transform: scale(1.1);
+}
+
+/* 오버레이 스타일 (기존 유지) */
+.media-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.media-item:hover .media-overlay {
+    opacity: 1;
+}
+
+.media-overlay span {
+    color: var(--main-color);
+    font-weight: 800;
+    border: 1px solid var(--main-color);
+    padding: 8px 20px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* 하단 스크롤 힌트 텍스트 */
+.scroll-hint {
+    text-align: center;
+    color: #555;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* [리셋 버튼 전용 스타일] */
+.reset-btn {
+    font-size: 1.2rem;
+    /* 아이콘이니까 좀 크게 */
+    padding: 8px 15px;
+    /* 정사각형에 가깝게 */
+    color: var(--main-color);
+    /* 라임색 */
+    border-color: var(--main-color);
+}
+
+.reset-btn:hover {
+    background: var(--main-color);
+    color: #000;
+    box-shadow: 0 0 10px rgba(207, 255, 4, 0.5);
+}
+
+/* [DEV LOG Section: Tab Layout] */
+#comment {
+    min-height: 100vh;
+    padding: 100px 0;
+    background: #080808;
+    display: flex;
+    align-items: center;
+}
+
+.comment-container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 탭 버튼 스타일 */
+.comment-tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #555;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: all 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    /* 영문 폰트 추천 */
+}
+
+.tab-btn:hover {
+    color: #fff;
+}
+
+.tab-btn.active {
+    color: var(--main-color);
+    border-bottom: 3px solid var(--main-color);
+}
+
+/* 탭 내용 영역 공통 */
+.tab-content {
+    display: none;
+    /* 기본적으로 숨김 */
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+    /* 활성화된 것만 보임 */
+}
+
+.tab-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+/* 1. EPISODE: 텍스트 스크롤 박스 */
+.text-scroll-box {
+    max-height: 500px;
+    overflow-y: auto;
+    /* 내용 길면 스크롤 */
+    padding-right: 20px;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    color: #ccc;
+    white-space: pre-line;
+    /* 엔터치면 줄바꿈 인식 */
+}
+
+/* 스크롤바 디자인 */
+.text-scroll-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.text-scroll-box::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+}
+
+/* 2. Q&A 스타일 */
+.qna-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.qna-item {
+    border-bottom: 1px solid #222;
+    padding-bottom: 20px;
+}
+
+.q-box {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.q-mark {
+    color: var(--main-color);
+    font-size: 1.3rem;
+}
+
+.a-box {
+    font-size: 1rem;
+    color: #999;
+    line-height: 1.6;
+    padding-left: 30px;
+}
+
+/* 3. MESSAGE 스타일 */
+.message-box {
+    border: 1px solid #333;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    text-align: center;
+}
+
+.msg-text {
+    font-size: 1.2rem;
+    line-height: 2;
+    color: #ddd;
+    margin-bottom: 40px;
+}
+
+.signature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.signature span {
+    font-size: 0.8rem;
+    color: #666;
+    letter-spacing: 2px;
+}
+
+.sign-img {
+    width: 100px;
+    opacity: 0.7;
+    filter: invert(1);
+}
+
+/* 서명 이미지 있으면 교체 */
+
+/* 페이드인 애니메이션 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
