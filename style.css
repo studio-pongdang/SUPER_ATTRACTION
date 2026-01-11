@@ -1506,3 +1506,24 @@ section {
         font-size: 0.75rem;
     }
 }
+
+/* [이름 줄바꿈 방지 긴급 패치] */
+.char-card h4,
+.char-card .eng-name,
+.char-card span {
+    /* 영어 이름이 들어있을 법한 태그들 */
+    white-space: nowrap !important;
+    /* ★절대 줄바꿈 금지★ */
+    letter-spacing: -0.5px;
+    /* 자간을 아주 살짝 좁힘 */
+}
+
+/* 유경이처럼 이름 긴 경우 폰트 사이즈 자동 조절 */
+@media (max-width: 1200px) {
+
+    .char-card h4,
+    .char-card .eng-name {
+        font-size: 0.85rem !important;
+        /* 화면 좁을 땐 글씨 살짝 줄이기 */
+    }
+}
