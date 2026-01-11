@@ -1429,3 +1429,80 @@ section {
         transform: translateY(0);
     }
 }
+
+/* [MOBILE & FOLD FIX: 최종 수정본] */
+
+/* 1. 폴드 펼친 화면 & 태블릿 & 좁은 PC (1200px 이하) */
+@media (max-width: 1200px) {
+
+    /* [네비게이션] 메뉴가 두 줄로 깨지는 것 방지 */
+    .nav-menu {
+        gap: 15px;
+        /* 메뉴 사이 간격 좁히기 */
+    }
+
+    .nav-menu a {
+        font-size: 0.85rem;
+        /* 글자 크기 조금 줄임 */
+        white-space: nowrap;
+        /* ★절대 줄바꿈 금지★ (한 줄 유지) */
+    }
+
+    .logo {
+        font-size: 1.2rem;
+        /* 로고도 살짝 작게 */
+    }
+
+    /* [메인] 글자 크기 다이어트 */
+    .hero-title {
+        font-size: 3.5rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        width: 90%;
+    }
+
+    /* [캐릭터] 카드 세로 정렬 (찌그러짐 해결) */
+    .char-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .char-card {
+        width: 100%;
+        max-width: 500px;
+        height: 600px;
+        margin-bottom: 40px;
+    }
+
+    /* [DEV LOG] 내용 글자 크기 최적화 */
+    .msg-text {
+        font-size: 1rem;
+        /* 너무 크지 않게 */
+        word-break: keep-all;
+        /* 단어 중간에 끊기지 않게 */
+    }
+}
+
+/* 2. 일반 스마트폰 세로 화면 (768px 이하) */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 0;
+    }
+
+    .intro-wrapper h2 {
+        font-size: 2rem;
+    }
+
+    /* 모바일에서는 메뉴 글자를 더 작게 */
+    .nav-menu {
+        gap: 10px;
+    }
+
+    .nav-menu a {
+        font-size: 0.75rem;
+    }
+}
