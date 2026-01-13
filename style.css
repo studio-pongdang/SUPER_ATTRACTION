@@ -336,9 +336,7 @@ section {
 
 /* [Universe Pinning Section] */
 #universe-pin-wrapper {
-    /* [핵심 수정] 글로벌 section의 flex 중앙 정렬 무력화 */
     display: block !important;
-
     width: 100%;
     height: 100vh;
     overflow: hidden;
@@ -347,65 +345,64 @@ section {
 }
 
 .horizontal-scroll-track {
-    display: flex;
-    /* 3페이지 길이 확보 */
-    width: 300vw;
-    height: 100%;
-
-    /* [핵심 수정] 왼쪽 정렬 강제 (혹시 모를 마진 제거) */
-    margin: 0;
-    padding: 0;
-    justify-content: flex-start;
-
-    will-change: transform;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    /* 패널이 아래로 떨어지는 것 방지 */
+    width: fit-content !important;
+    /* 내부 패널 합계만큼 너비 자동 확장 */
 }
 
 .pin-panel {
-    width: 100vw;
-    height: 100vh;
+    width: 100vw !important;
+    /* 각 패널은 정확히 화면 100% 차지 */
+    min-width: 100vw !important;
+    height: 100vh !important;
+    flex-shrink: 0 !important;
+    /* 절대 찌그러지지 않게 설정 */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    padding-top: 150px !important;
+    /* 상단 여백 확보 */
+    overflow: hidden !important;
+}
 
-    /* 패널 찌그러짐 방지 */
-    flex-shrink: 0;
-
-    display: flex;
-    justify-content: center;
-
-    /* ★ 핵심 수정: 중앙 정렬(center)을 끄고 위쪽 정렬(flex-start)로 변경 */
-    align-items: flex-start;
-
-    /* ★ 위에서부터 얼마나 띄울지 결정 (이 값으로 높이를 통일시킵니다) */
-    padding-top: 220px;
-
+.panel-inner {
+    width: 100%;
+    max-width: 1300px;
+    text-align: left;
+    padding: 0 40px;
     box-sizing: border-box;
 }
 
-/* (이하 내부 디자인은 동일하게 유지) */
-.panel-inner {
-    width: 100%;
-    max-width: 1200px;
-    text-align: left;
-}
-
+/* 3. 공통 제목 스타일 (1, 2, 3페이지 동일 크기 강제 적용) */
 .panel-num {
-    font-size: 0.8rem;
+    font-size: 1.1rem !important;
     font-weight: 800;
     color: var(--main-color);
     letter-spacing: 2px;
+    margin-bottom: 5px;
 }
 
-.panel-title {
-    font-size: clamp(3rem, 8vw, 6rem);
+.panel-title,
+.intro-title {
+    /* COORDINATES, STUDIO PONGDANG과 같은 크기인 4.5rem으로 고정 */
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem) !important;
     font-weight: 900;
-    margin: 20px 0;
+    margin: 10px 0 20px 0;
     letter-spacing: -2px;
     line-height: 1;
+    white-space: nowrap;
+    /* 줄바꿈 절대 방지 */
+    color: #fff !important;
 }
 
 .panel-divider {
     border: 0;
     height: 1px;
     background: rgba(255, 255, 255, 0.2);
-    margin-bottom: 50px;
+    margin-bottom: 35px;
+    /* 본문과의 간격 살짝 좁힘 */
 }
 
 /* [새로운 레이아웃 스타일 추가] */
@@ -622,33 +619,7 @@ section {
     margin-right: 10px;
 }
 
-/* 진행 바 전체 틀 (회색 배경) */
-.progress-track-wrapper {
-    position: absolute;
-    /* ★ 기존 180px -> 160px로 올려서 제목과 간격을 벌립니다 */
-    top: 160px;
-
-    left: 10%;
-    /* 좌측 여백은 본문과 동일하게 유지 */
-    /* width는 1페이지 벤토 그리드 너비와 비슷하게 맞추면 예쁩니다 (약 70~80%) */
-    width: 70%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.15);
-    z-index: 50;
-}
-
-/* 채워지는 막대 (라임색) */
-.progress-fill-bar {
-    width: 0%;
-    /* 처음엔 0%에서 시작 */
-    height: 100%;
-    background: var(--main-color);
-    /* 라임색 */
-    box-shadow: 0 0 10px var(--main-color);
-    /* 살짝 빛나는 네온 효과 */
-}
-
-/* [3페이지 전용 스타일: Narrative Layout] */
+/* --- Page 03: Narrative (INTRO) 전용 보정 --- */
 
 /* 상단 작은 텍스트 */
 .intro-sub-top {
@@ -662,49 +633,68 @@ section {
     /* 타자기 느낌 폰트 */
 }
 
-/* 메인 타이틀 줄간격 조정 */
+/* ★ 4번 해결: '가산디지털단지...' 제목만 예외적으로 두 줄 허용 및 크기 축소 ★ */
+/* [최종 복구] 03 패널 원본 스타일 및 자간/굵기 보정 */
+
+/* 1. 제목: COORDINATES, STUDIO PONGDANG과 동일한 크기 및 간격 */
+.panel-title,
 .intro-title {
-    line-height: 1.1;
-    /* 줄 간격을 좁혀서 덩어리감 있게 */
-    margin-top: 0;
-    /* 위쪽 여백 제거 (sub-top과 붙이기 위해) */
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem) !important;
+    /* 원본 크기 고정 */
+    font-weight: 900 !important;
+    /* 원본 굵기 복구 */
+    margin: 10px 0 20px 0 !important;
+    letter-spacing: -2px !important;
+    /* 뭉쳐 보이지 않게 자간 고정 */
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    /* 줄바꿈 절대 방지 */
+    color: #fff !important;
 }
 
-/* 본문 텍스트 박스 */
+/* 2. 본문 박스: 누락되었던 컨테이너 복구 */
+.intro-text-box {
+    width: 100% !important;
+    max-width: 1000px !important;
+    /* 가로로 너무 퍼지지 않게 제한 */
+    margin-top: 20px !important;
+    display: block !important;
+}
+
+/* 3. 본문 텍스트: 가독성 및 겹침 방지 */
 .intro-text-box p {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    /* 가독성 좋은 줄간격 */
-    color: #e0e0e0;
-    font-weight: 500;
-    margin-bottom: 40px;
-    /* 문단 사이 넓게 띄우기 (2줄 단위 구분) */
-    word-break: keep-all;
-    /* 한글 단어 끊김 방지 */
+    /* 1. 회색기 완전 제거 -> 쨍한 흰색 복구 */
+    color: #ffffff !important;
+    font-size: 1.1rem !important;
+    line-height: 1.8 !important;
+    margin-bottom: 25px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.5px !important;
+    /* 본문 자간 최적화 */
+    white-space: normal !important;
+    word-break: keep-all !important;
 }
 
-/* 태그 컨테이너 */
+/* 4. 태그 컨테이너: 위치 및 간격 최적화 */
 .intro-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    /* 태그 사이 간격 */
-    margin-top: 10px;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    /* 벌어졌던 15px 간격을 8px로 촘촘하게 줄임 */
+    gap: 8px !important;
+    margin-top: 15px !important;
 }
 
-/* 개별 태그 디자인 */
 .tag-badge {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
-    border-radius: 50px;
-    /* 둥근 알약 모양 */
-    background: rgba(0, 0, 0, 0.3);
-    font-size: 0.8rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding: 6px 12px !important;
+    /* 패딩을 살짝 더 줄여 촘촘하게 */
+    border-radius: 50px !important;
+    font-size: 0.72rem !important;
+    /* 텍스트 크기 미세 조정 */
+    font-weight: 700 !important;
+    /* 태그 내부 글자들의 자간도 원본처럼 찰지게 붙임 */
+    letter-spacing: -0.2px !important;
+    background: transparent !important;
 }
 
 /* 태그 호버 효과 (마우스 올리면 라임색) */
@@ -716,14 +706,17 @@ section {
 
 /* 태그 앞부분 (GENRE, DANGER...) */
 .tag-head {
-    color: var(--main-color);
-    font-weight: 900;
+    /* 앞부분: 다시 라임색으로 강제 소환 */
+    color: var(--main-color) !important;
+    font-weight: 900 !important;
+    display: inline-block !important;
 }
 
 /* 태그 구분선 (|) */
 .tag-head::after {
-    content: '|';
-    margin-left: 10px;
+    content: '|' !important;
+    margin-left: 8px !important;
+    margin-right: 8px !important;
     color: #444;
     font-weight: 300;
 }
@@ -732,265 +725,7 @@ section {
 .tag-body {
     color: #fff;
     letter-spacing: 0.5px;
-}
-
-/* [Character Section: Interactive Accordion] */
-
-#characters {
-    /* 화면 전체를 꽉 채우는 섹션 */
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background: #0a0a0a;
-    position: relative;
-    overflow: hidden;
-    /* 내용 넘침 방지 */
-}
-
-.char-container {
-    width: 100%;
-    height: 80vh;
-    /* 화면의 80% 높이 사용 */
-    display: flex;
-    flex-direction: column;
-}
-
-.char-accordion {
-    display: flex;
-    /* 가로 배치 */
-    width: 100%;
-    height: 100%;
-    gap: 2px;
-    /* 카드 사이 얇은 간격 */
-    margin-top: 30px;
-}
-
-/* 개별 캐릭터 카드 */
-.char-card {
-    flex: 1;
-    /* 기본 너비: 1:1:1 */
-    position: relative;
-    background: #111;
-    border: 1px solid #333;
-    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    /* 부드러운 늘어남 */
-    overflow: hidden;
-    cursor: pointer;
-}
-
-/* 캐릭터 배경 (나중에 이미지 들어갈 곳) */
-.char-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    transition: opacity 0.5s;
-}
-
-/* [추가] 캐릭터별 배경 이미지 설정 */
-/* 공통 설정: 그라데이션 + 이미지 결합, 꽉 차게, 중앙 정렬 */
-#char-minju .char-bg,
-#char-yukyeong .char-bg,
-#char-chaeeun .char-bg {
-    background-size: cover;
-    background-position: center top;
-    /* 캐릭터 얼굴 위주로 보이게 상단 정렬 */
-    background-repeat: no-repeat;
-}
-
-/* 1. 김민주 (ISTJ, 도르트문트) */
-#char-minju .char-bg {
-    /* 문법: background: [그라데이션(위)], [이미지(아래)]; */
-    background-image:
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.95) 80%),
-        url('01.png');
-    /* <--- 경로 수정 필수! */
-}
-
-/* 2. 채유경 (ENFP, 맨유) */
-#char-yukyeong .char-bg {
-    background-image:
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.95) 80%),
-        url('04.png');
-    /* <--- 경로 수정 필수! */
-}
-
-/* 3. 이채은 (ENTP, 레알) */
-#char-chaeeun .char-bg {
-    background-image:
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.95) 80%),
-        url('07.png');
-    /* <--- 경로 수정 필수! */
-}
-
-/* 마우스 올렸을 때 효과 */
-.char-card:hover {
-    flex: 2.5;
-    /* 너비가 2.5배로 늘어남 */
-    border-color: var(--main-color);
-    /* 테두리 라임색 */
-}
-
-/* 다른 카드에 마우스 올렸을 때 나는 흐려짐 */
-.char-accordion:hover .char-card:not(:hover) {
-    opacity: 0.5;
-    /* 비활성 카드 어둡게 */
-}
-
-/* 텍스트 내용 래퍼 */
-.char-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 40px;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-/* 상단 정보 (항상 보임) */
-.char-role {
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: var(--main-color);
-    letter-spacing: 2px;
-    margin-bottom: 5px;
-    display: block;
-}
-
-/* [이름 디자인 수정: 한글 메인 + 영문 서브] */
-
-/* 1. 한글 이름 (크고 웅장하게) */
-.char-name-ko {
-    font-size: 3.5rem;
-    /* 기존 영문 크기와 동일하게 유지 */
-    font-weight: 900;
-    /* 아주 굵게 */
-    color: #fff;
-    /* 흰색 */
-    line-height: 1.1;
-    /* 줄 간격 */
-    margin-top: 10px;
-    /* 위쪽 역할(ROLE)과의 간격 */
-    margin-bottom: 5px;
-    /* 아래쪽 영문 이름과의 간격 */
-    letter-spacing: -1px;
-    /* 한글은 자간을 살짝 좁혀야 단단해 보임 */
-}
-
-/* 2. 영문 이름 (작고 세련되게) */
-.char-name-en {
-    display: block;
-    /* 줄바꿈 */
-    font-size: 1.1rem;
-    /* 작게 */
-    color: rgba(255, 255, 255, 0.6);
-    /* 은은한 회색 (흰색보다 어둡게 해서 위계 조정) */
-    font-weight: 500;
-    text-transform: uppercase;
-    /* 대문자로 변환 (KIM MIN-JU) */
-    letter-spacing: 1px;
-    /* 자간을 넓혀서 시원하게 */
-    margin-bottom: 25px;
-    /* 태그와의 간격 */
-    font-family: sans-serif;
-    /* 깔끔한 고딕 계열 */
-}
-
-.char-tags {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-/* [수정] 캐릭터 태그 스타일 (가독성 UP 버전) */
-.char-tags span {
-    /* 1. 배경을 진한 반투명 검정으로 깔아서 글자를 팝업시킴 */
-    background: rgba(0, 0, 0, 0.7);
-
-    /* 2. (선택사항) 뒤에 있는 이미지를 흐리게 만들어 글자에 집중시킴 (최신 브라우저용) */
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-
-    /* 3. 테두리는 유지하되 조금 더 밝고 투명하게 */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
-    /* 4. 텍스트 가독성 확보 */
-    color: #fff;
-    /* 완전 흰색 */
-    font-weight: 700;
-    /* 굵게 */
-    font-size: 0.85rem;
-    /* 기존보다 아주 살짝 키움 */
-    letter-spacing: 0.5px;
-
-    /* 5. 형태와 여백 */
-    padding: 6px 16px;
-    /* 내부 여백을 늘려 넉넉하게 */
-    border-radius: 50px;
-    /* 둥근 캡슐 모양 */
-
-    /* 6. 입체감 추가 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-/* 상세 정보 (평소엔 숨김 -> 호버 시 나타남) */
-.char-body {
-    max-height: 0;
-    /* 높이 0으로 숨김 */
-    opacity: 0;
-    overflow: hidden;
-    transition: all 0.5s ease;
-    /* 서서히 나타남 */
-    transform: translateY(20px);
-}
-
-.char-card:hover .char-body {
-    max-height: 500px;
-    /* 충분한 높이로 열림 */
-    opacity: 1;
-    transform: translateY(0);
-    margin-top: 20px;
-    /* 이름과의 간격 */
-}
-
-/* 대사 및 스펙 스타일 */
-.char-quote {
-    font-size: 1.1rem;
-    font-style: italic;
-    color: #fff;
-    margin-bottom: 25px;
-    padding-left: 15px;
-    border-left: 3px solid var(--main-color);
-    transition: all 0.5s ease;
-    /* 멘트 바뀔 때 부드럽게 */
-    position: relative;
-}
-
-.char-specs {
-    list-style: none;
-    margin-bottom: 25px;
-}
-
-.char-specs li {
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-    color: #ccc;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 5px;
-}
-
-.char-specs strong {
-    color: var(--main-color);
-    margin-right: 10px;
-    font-weight: 800;
-}
-
-.char-desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #999;
+    font-weight: 500 !important;
 }
 
 /* [BGM Controller Style] */
@@ -1575,4 +1310,713 @@ section {
     transform: none !important;
     position: relative !important;
     /* absolute 필요 없음 */
+}
+
+/* ================================================== */
+/* [최종 수정일: 오늘] 인트로 완전체 (글자 고정 + 셔터) */
+/* ================================================== */
+
+/* 1. 전체 화면 껍데기 */
+#intro-wrapper {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+
+    /* ★중요: 배경을 투명하게 해서 뒤에 있는 셔터가 보이게 함 */
+    background: transparent !important;
+
+    /* 중앙 정렬 */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    /* 클릭 방지 (열린 뒤 방해 안 되게) */
+    pointer-events: none;
+    overflow: hidden !important;
+}
+
+/* 2. 텍스트 담는 공간 (셔터보다 위에 둥둥 떠야 함) */
+.intro-sequence {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 100001;
+    /* 셔터(100000)보다 높게! */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* 3. 텍스트 스타일 (흔들림 없는 편안함) */
+.seq-item {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 900;
+
+    /* 초기 상태: 안 보임 */
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* PC 화면 글자 크기 */
+@media (min-width: 768px) {
+    .seq-item {
+        font-size: 3.5rem;
+    }
+}
+
+.lime-text {
+    color: #ceff00;
+}
+
+
+/* ================================================== */
+/* ▼ [셔터 애니메이션] 문 열리는 모터 장착! ▼ */
+/* ================================================== */
+
+/* 4. 위아래 셔터 공통 설정 */
+.shutter {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    /* 화면의 절반씩 차지 */
+    background-color: #000;
+    /* 검은색 문 */
+    z-index: 100000;
+    /* 글자보단 아래, 본문보단 위 */
+
+    /* 부드럽게 열리는 효과 */
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* 5. 위쪽 셔터 (천장에 붙음) */
+.shutter-top {
+    top: 0;
+    transform-origin: top;
+}
+
+/* 6. 아래쪽 셔터 (바닥에 붙음) */
+.shutter-bottom {
+    bottom: 0;
+    transform-origin: bottom;
+}
+
+/* 7. ★문 열려라 참깨! (JS가 .open을 붙이면 실행됨)★ */
+#intro-wrapper.open .shutter-top {
+    transform: translateY(-100%);
+    /* 위로 슉 */
+}
+
+#intro-wrapper.open .shutter-bottom {
+    transform: translateY(100%);
+    /* 아래로 슉 */
+}
+
+/* ================================================== */
+/* [SQUAD 뒷면 리뉴얼] 디지털 데이터 카드 스타일 */
+/* ================================================== */
+
+/* 1. 뒷면 전체 컨테이너 (카드 본체) */
+.flip-card-back {
+    background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+    /* 깊이감 있는 어두운 배경 */
+    color: #fff;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    /* 상하 배치 */
+    justify-content: space-between;
+    /* 내용물을 위아래로 쭉 펼침 (쏠림 방지) */
+    padding: 25px;
+    border: 1px solid #333;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+    /* 안쪽 그림자로 깊이감 추가 */
+}
+
+/* 카드 테두리 네온 발광 효과 */
+.card-glow-border {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid rgba(206, 255, 0, 0.3);
+    /* 은은한 라임색 테두리 */
+    border-radius: 16px;
+    z-index: -1;
+    /* 내용물 뒤로 */
+    pointer-events: none;
+    box-shadow: 0 0 15px rgba(206, 255, 0, 0.2);
+    /* 은은한 빛 번짐 */
+}
+
+/* ================= [섹션별 디자인] ================= */
+
+/* 2. 카드 헤더 (상단 이름표) */
+.card-header {
+    text-align: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    /* 공간 부족해도 줄어들지 않음 */
+}
+
+.access-level {
+    display: block;
+    font-size: 0.7rem;
+    color: #ceff00;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    opacity: 0.8;
+}
+
+.card-header h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(206, 255, 0, 0.3);
+    /* 이름이 빛나는 효과 */
+}
+
+.header-line {
+    width: 50px;
+    height: 3px;
+    background: #ceff00;
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+/* 3. 카드 바디 (내용 영역) */
+.card-body {
+    flex-grow: 1;
+    /* 남은 공간을 꽉 채움 */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* 패널 사이 간격 */
+    overflow-y: auto;
+    /* 내용 넘치면 스크롤 */
+    scrollbar-width: none;
+}
+
+.card-body::-webkit-scrollbar {
+    display: none;
+}
+
+/* 데이터 패널 공통 스타일 (구역 나누기) */
+.data-panel {
+    background: rgba(255, 255, 255, 0.03);
+    /* 아주 연한 배경 */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* 얇은 테두리 */
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* 4. 상단 패널 (태그 & 명대사) */
+.char-tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.char-tags span {
+    background: rgba(206, 255, 0, 0.1);
+    border: 1px solid #ceff00;
+    color: #ceff00;
+    padding: 4px 10px;
+    border-radius: 4px;
+    /* 알약 모양 대신 각진 칩 모양 */
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.quote-box {
+    position: relative;
+    padding: 5px 10px;
+}
+
+.char-quote {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #eee;
+    text-align: center;
+    font-style: italic;
+    margin: 0;
+}
+
+/* 5. 스펙 패널 (데이터 표 느낌) */
+.panel-title {
+    /* ★ 4번 해결: COORDINATES 등이 절대 두 줄이 되지 않도록 크기 상한선 설정 ★ */
+    font-size: clamp(3rem, 7vw, 5.2rem) !important;
+    font-weight: 900;
+    margin: 10px 0 20px 0;
+    letter-spacing: -2px;
+    line-height: 1;
+    white-space: nowrap;
+    /* 강제 한 줄 유지 */
+    color: #fff;
+}
+
+.char-specs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.char-specs-list li {
+    display: flex;
+    /* 좌우 정렬 */
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    /* 점선 구분선 */
+    font-size: 0.85rem;
+}
+
+.char-specs-list li:last-child {
+    border-bottom: none;
+}
+
+.char-specs-list .label {
+    color: #ceff00;
+    font-weight: 700;
+    flex-basis: 30%;
+    /* 왼쪽 라벨 영역 너비 */
+    text-align: left;
+}
+
+.char-specs-list .value {
+    color: #ccc;
+    flex-basis: 65%;
+    /* 오른쪽 값 영역 너비 */
+    text-align: right;
+}
+
+/* 6. 하단 설명 패널 */
+.desc-panel {
+    background: transparent;
+    /* 배경 없이 깔끔하게 */
+    border: none;
+    padding-top: 0;
+    margin-top: auto;
+    /* 하단으로 밀어내기 */
+}
+
+.char-desc-text {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #888;
+    text-align: justify;
+    /* 양쪽 정렬로 단정하게 */
+    word-break: keep-all;
+}
+
+/* ================================================== */
+/* [SQUAD 최종_완성] 이채은 STYLE 줄바꿈 완벽 해결판 */
+/* ================================================== */
+
+/* 1. 레이아웃 (어깨 깡패 모드 유지) */
+.squad-grid-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 25px !important;
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+/* 2. 카드 크기 */
+.flip-card {
+    background-color: transparent;
+    width: 100% !important;
+    min-width: 320px !important;
+    height: 600px !important;
+    perspective: 1500px;
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-style: preserve-3d !important;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* 3. 앞면 디자인 */
+.flip-card-front {
+    background-color: #111;
+    z-index: 2;
+}
+
+.flip-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 꽉 차게 유지 */
+    /* 기존: object-position: top center; (위쪽 기준) */
+    /* 변경: object-position: center; (완전 정중앙 기준) */
+    object-position: center !important;
+}
+
+.front-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 20%, transparent);
+    text-align: left;
+}
+
+.front-overlay h3 {
+    margin: 0;
+    font-size: 2.4rem;
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.front-overlay span {
+    color: #ceff00;
+    font-weight: 700;
+    font-size: 1rem;
+    display: block;
+    margin-top: 5px;
+}
+
+
+/* ================================================== */
+/* ★ 4. 뒷면 디자인 (여기가 수정됨!) ★ */
+/* ================================================== */
+.flip-card-back {
+    background: linear-gradient(145deg, #111 0%, #050505 100%);
+    color: #fff;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    border: 1px solid #222;
+}
+
+/* [헤더] */
+.card-header {
+    text-align: center;
+    height: 70px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 15px;
+}
+
+.access-level {
+    font-size: 0.7rem;
+    color: #ceff00;
+    letter-spacing: 2px;
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.card-header h3 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #fff;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+/* [바디] */
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+}
+
+/* 패널 공통 */
+.data-panel {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* [태그] */
+.char-tags {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.char-tags span {
+    border: 1px solid #ceff00;
+    color: #ceff00;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* [명대사] */
+.quote-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.char-quote {
+    font-family: 'Pretendard', sans-serif;
+    font-style: italic;
+    color: #eee;
+    text-align: center;
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+}
+
+/* ★★★ [스펙 데이터] 핵심 수정 부분 ★★★ */
+.specs-panel {
+    padding: 12px 20px;
+}
+
+.char-specs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.char-specs-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem;
+}
+
+.char-specs-list li:last-child {
+    border-bottom: none;
+}
+
+/* 왼쪽(라벨): 공간을 22%로 줄임 (STYLE 글자는 짧으니까요) */
+.char-specs-list .label {
+    color: #ceff00;
+    font-weight: 700;
+    width: 22%;
+    /* ★30% -> 22%로 축소★ */
+    text-align: left;
+}
+
+/* 오른쪽(값): 공간을 78%로 늘림 (포니테일 들어갈 자리 확보) */
+.char-specs-list .value {
+    color: #ccc;
+    width: 78%;
+    /* ★70% -> 78%로 확장★ */
+    text-align: right;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    /* 자간을 좁혀서 더 쏙 들어가게 함 */
+    white-space: nowrap;
+    /* ★강제로 한 줄에 나오게 명령★ */
+}
+
+/* [하단 설명] */
+.desc-panel {
+    background: transparent;
+    border: none;
+    padding: 0 5px;
+    margin-top: auto;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.char-desc-text {
+    font-size: 0.9rem;
+    color: #aaa;
+    line-height: 1.5;
+    text-align: left;
+    word-break: keep-all;
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+/* 테두리 네온 */
+.card-glow-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(206, 255, 0, 0.25);
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+/* [반응형] */
+@media (max-width: 1450px) {
+    .squad-grid-wrapper {
+        max-width: 1200px !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .squad-grid-wrapper {
+        grid-template-columns: repeat(2, 1fr) !important;
+        max-width: 850px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .squad-grid-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+
+    .flip-card {
+        height: 600px !important;
+    }
+}
+
+/* ================================================== */
+/* [SQUAD 이미지 개별 미세 조정] 디자이너의 집착 구역 */
+/* ================================================== */
+
+/* 기본 설정 (혹시 모르니 안전장치) */
+.flip-card-front img {
+    object-position: center center !important;
+}
+
+/* 1. 김민주 (약간 오른쪽으로 치우친 경우 -> 왼쪽으로 당겨야 함) */
+#card-minju .flip-card-front img {
+    /* ▼ 이 숫자를 조절하세요! (50%가 중앙) ▼ */
+    /* 예: 45%는 이미지를 왼쪽으로 5% 이동 */
+    object-position: 55% center !important;
+}
+
+/* 2. 채유경 (얘가 기준점이라면 50% 유지) */
+#card-yukyeong .flip-card-front img {
+    /* ▼ 유경이가 중앙이라면 그대로 두세요 ▼ */
+    object-position: 50% center !important;
+}
+
+/* 3. 이채은 (약간 왼쪽으로 치우친 경우 -> 오른쪽으로 밀어야 함) */
+#card-chaeeun .flip-card-front img {
+    /* ▼ 이 숫자를 조절하세요! ▼ */
+    /* 예: 55%는 이미지를 오른쪽으로 5% 이동 */
+    object-position: 67% center !important;
+}
+
+/* ================================================== */
+/* [거대 제목 복구] COORDINATES & STUDIO 스타일 고정 */
+/* ================================================== */
+
+/* 1. 거대 제목 (COORDINATES 등) */
+.panel-title,
+.intro-title {
+    /* COORDINATES, STUDIO PONGDANG과 같은 크기인 4.5rem으로 고정 */
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem) !important;
+    font-weight: 900;
+    margin: 10px 0 20px 0;
+    letter-spacing: -2px;
+    line-height: 1;
+    white-space: nowrap;
+    /* 줄바꿈 절대 방지 */
+    color: #fff !important;
+}
+
+/* 2. 상단 노란 숫자 (01 / 03) */
+.intro-sub {
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    color: #ceff00 !important;
+    /* 라임색 포인트 */
+    display: block !important;
+    margin-bottom: 10px !important;
+    font-family: 'Courier New', monospace;
+}
+
+/* 3. 제목 구역 정렬 */
+.intro-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 40px auto;
+    padding: 80px 20px 0 20px;
+    text-align: left;
+}
+
+/* 4. 제목 밑 실선 */
+.section-divider {
+    border: none !important;
+    height: 1px !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    margin-top: 30px !important;
+    width: 100% !important;
+}
+
+/* [SQUAD Card Fix] 카드 뒷면 제목 크기 정상화 */
+.flip-card-back .panel-title {
+    /* 거대해진 폰트 크기를 카드에 맞게 대폭 축소 */
+    font-size: 1.4rem !important;
+
+    /* 옆으로 삐져나오게 만드는 '줄바꿈 금지' 해제 */
+    white-space: normal !important;
+
+    /* 위아래 간격 조정 */
+    margin: 10px 0 15px 0 !important;
+    letter-spacing: 1px !important;
+    color: var(--main-color) !important;
+    /* 가독성을 위해 라임색 권장 */
+    text-align: left;
 }
