@@ -331,3 +331,114 @@ function updateOfficeStatus() {
 // 페이지 로드 시 실행 + 1분마다 갱신 (시간 바뀌면 멘트도 바뀌게)
 window.addEventListener('load', updateOfficeStatus);
 setInterval(updateOfficeStatus, 60000);
+
+/* [갤러리 시스템 V7: 스크롤 위치 완벽 보정판] */
+/* (움직이는 버튼 대신, 고정된 섹션 제목을 찾아가도록 수정) */
+
+window.addEventListener('load', () => {
+    const slider = document.querySelector('.media-slider');
+
+    if (!slider) return;
+
+    // 1. 갤러리 초기화
+    slider.innerHTML = '';
+
+    // 2. 이미지 82장 HTML 생성
+    let htmlCode = '';
+
+    for (let i = 1; i <= 82; i++) {
+        let charClass = '';
+        let charName = '';
+        let fileExt = '.png';
+
+        // [A] 캐릭터 분류
+        if (i >= 1 && i <= 26) {
+            charClass = 'minju';
+            charName = '김민주';
+        } else if (i >= 27 && i <= 52) {
+            charClass = 'yukyeong';
+            charName = '채유경';
+        } else if (i >= 53 && i <= 78) {
+            charClass = 'chaeeun';
+            charName = '이채은';
+        } else if (i >= 79 && i <= 82) {
+            charClass = 'thumb';
+            charName = '썸네일';
+
+            // [B] 확장자 예외 처리
+            if (i >= 79 && i <= 81) fileExt = '.jpg';
+            else if (i === 82) fileExt = '.gif';
+        }
+
+        htmlCode += `
+            <div class="media-item ${charClass}">
+                <div class="media-overlay">
+                    <span>${charName} #${i}</span>
+                </div>
+                <img src="images/${i}${fileExt}" alt="${charName} ${i}" loading="lazy">
+            </div>
+        `;
+    }
+
+    slider.innerHTML = htmlCode;
+
+    // ==========================================
+    // 3. 필터 버튼 기능 (간판 위치로 강제 이동)
+    // ==========================================
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const mediaItems = document.querySelectorAll('.media-item');
+    // ★수정됨: 움직이는 버튼 대신, 고정된 '섹션 전체'를 타겟으로 잡음
+    const gallerySection = document.getElementById('gallery');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // (1) 버튼 스타일 활성화
+            filterBtns.forEach(b => b.classList.remove('active'));
+            const clickedBtn = e.target.closest('.filter-btn');
+            if (clickedBtn) clickedBtn.classList.add('active');
+
+            // (2) 필터링 실행
+            const filterValue = clickedBtn.getAttribute('data-filter');
+
+            mediaItems.forEach(item => {
+                if (item.classList.contains(filterValue)) {
+                    item.style.setProperty('display', 'block', 'important');
+                } else {
+                    item.style.setProperty('display', 'none', 'important');
+                }
+            });
+
+            // (3) ★핵심 수정: 무조건 갤러리 간판(제목) 위치로 이동★
+            if (gallerySection) {
+                const sectionTop = gallerySection.offsetTop; // 갤러리 섹션의 절대 위치
+                const currentScroll = window.pageYOffset;
+
+                // 현재 스크롤이 갤러리 제목보다 아래에 있다면 (내용을 보고 있었다면)
+                if (currentScroll > sectionTop) {
+                    window.scrollTo({
+                        top: sectionTop - 60, // 제목 위로 살짝 여유(60px) 있게 이동
+                        behavior: 'auto' // 'smooth'는 울렁거릴 수 있으니 'auto' 추천
+                    });
+                }
+            }
+        });
+    });
+
+    // ==========================================
+    // 4. 초기 실행: '김민주' 자동 선택
+    // ==========================================
+    if (filterBtns.length > 0) {
+        // 첫 번째 버튼(김민주) 자동 클릭
+        const firstBtn = document.querySelector('.filter-btn[data-filter="minju"]');
+        if (firstBtn) firstBtn.click();
+    }
+
+    // 리셋 버튼
+    const resetBtn = document.getElementById('reset-filter');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            const minjuBtn = document.querySelector('.filter-btn[data-filter="minju"]');
+            if (minjuBtn) minjuBtn.click();
+        });
+    }
+});

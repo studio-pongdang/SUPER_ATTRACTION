@@ -1095,171 +1095,6 @@ section {
     }
 }
 
-/* [MEDIA Section Style] */
-#gallery {
-    min-height: 100vh;
-    padding: 100px 0;
-    background: #050505;
-}
-
-.media-container {
-    width: 90%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* 필터 버튼 영역 */
-.media-filters {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 50px;
-}
-
-.filter-btn {
-    background: transparent;
-    border: 1px solid #444;
-    color: #888;
-    padding: 10px 25px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    letter-spacing: 1px;
-}
-
-.filter-btn:hover {
-    border-color: #fff;
-    color: #fff;
-}
-
-/* 선택된 버튼 스타일 (라임색) */
-.filter-btn.active {
-    background: var(--main-color);
-    border-color: var(--main-color);
-    color: #000;
-    box-shadow: 0 0 15px rgba(207, 255, 4, 0.4);
-}
-
-/* [MEDIA Section: Horizontal Slider Layout] */
-
-/* (기존 #gallery, .media-container, .media-filters 스타일은 유지하세요) */
-
-/* [핵심 변경] 그리드 대신 플렉스(가로 배치) 사용 */
-.media-slider {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    /* 가로 스크롤 허용 */
-    padding: 20px 5px;
-    /* 그림자 잘리지 않게 여백 */
-    scroll-behavior: smooth;
-    /* 부드러운 스크롤 */
-
-    /* 스크롤바 숨기기 (디자인 깔끔하게) */
-    -ms-overflow-style: none;
-    /* IE, Edge */
-    scrollbar-width: none;
-    /* Firefox */
-}
-
-/* 크롬, 사파리 스크롤바 숨기기 */
-.media-slider::-webkit-scrollbar {
-    display: none;
-}
-
-/* 개별 이미지 카드 스타일 수정 */
-.media-item {
-    /* [중요] 너비를 고정합니다. (300px ~ 400px 추천) */
-    min-width: 320px;
-    height: 450px;
-    /* 높이도 고정해서 통일감 주기 */
-
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    background: #111;
-    border: 1px solid #222;
-    flex-shrink: 0;
-    /* 공간 좁아도 찌그러지지 않게 방지 */
-    transition: transform 0.3s ease, border-color 0.3s;
-}
-
-/* 이미지 꽉 채우기 */
-.media-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* 비율 유지하며 꽉 채우기 */
-    transition: transform 0.5s ease;
-}
-
-/* 호버 효과 */
-.media-item:hover {
-    border-color: var(--main-color);
-    transform: translateY(-5px);
-    /* 살짝 위로 뜸 */
-}
-
-.media-item:hover img {
-    transform: scale(1.1);
-}
-
-/* 오버레이 스타일 (기존 유지) */
-.media-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.media-item:hover .media-overlay {
-    opacity: 1;
-}
-
-.media-overlay span {
-    color: var(--main-color);
-    font-weight: 800;
-    border: 1px solid var(--main-color);
-    padding: 8px 20px;
-    border-radius: 4px;
-    background: rgba(0, 0, 0, 0.8);
-}
-
-/* 하단 스크롤 힌트 텍스트 */
-.scroll-hint {
-    text-align: center;
-    color: #555;
-    font-size: 0.8rem;
-    margin-top: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
-}
-
-/* [리셋 버튼 전용 스타일] */
-.reset-btn {
-    font-size: 1.2rem;
-    /* 아이콘이니까 좀 크게 */
-    padding: 8px 15px;
-    /* 정사각형에 가깝게 */
-    color: var(--main-color);
-    /* 라임색 */
-    border-color: var(--main-color);
-}
-
-.reset-btn:hover {
-    background: var(--main-color);
-    color: #000;
-    box-shadow: 0 0 10px rgba(207, 255, 4, 0.5);
-}
-
 /* [DEV LOG Section: Tab Layout] */
 #comment {
     min-height: 100vh;
@@ -1526,4 +1361,218 @@ section {
         font-size: 0.85rem !important;
         /* 화면 좁을 땐 글씨 살짝 줄이기 */
     }
+}
+
+/* ========================================================= */
+/* [NEW MEDIA GALLERY: 인스타그램 스타일 바둑판 (최종_진짜.css)] */
+/* ========================================================= */
+
+/* ========================================================= */
+/* [FINAL CSS: 스티키 헤더 + 네온 버튼 꾸미기] */
+/* ========================================================= */
+
+/* 1. 버튼 담는 통 (화면 상단 고정) */
+.media-filters {
+    position: sticky;
+    /* 스크롤 내려도 따라옴 */
+    top: 0;
+    /* 천장에 딱 붙음 */
+    z-index: 1000;
+    /* 사진보다 위에 뜸 */
+
+    background: rgba(0, 0, 0, 0.95);
+    /* 뒤가 안 비치게 진한 검정 배경 */
+    border-bottom: 1px solid #333;
+    /* 아래에 얇은 선 */
+
+    padding: 15px 0;
+    /* 위아래 여백 */
+    display: flex;
+    /* 가로로 배치 */
+    justify-content: center;
+    /* 가운데 정렬 */
+    flex-wrap: wrap;
+    /* 모바일에서 좁으면 두 줄로 됨 */
+    gap: 10px;
+    /* 버튼 사이 간격 */
+    margin-bottom: 20px;
+}
+
+/* 2. 버튼 기본 모양 (생얼 탈출) */
+.filter-btn {
+    background: transparent;
+    /* 배경 투명 */
+    border: 1px solid #555;
+    /* 테두리 회색 */
+    color: #aaa;
+    /* 글씨 회색 */
+
+    padding: 8px 20px;
+    /* 크기 키우기 */
+    border-radius: 50px;
+    /* 캡슐 모양 (둥글게) */
+
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    /* 마우스 손가락 모양 */
+    transition: all 0.3s ease;
+    /* 부드럽게 변해라 */
+}
+
+/* 3. 마우스 올렸을 때 (호버) */
+.filter-btn:hover {
+    border-color: #ceff00;
+    /* 테두리 라임색 */
+    color: #ceff00;
+    /* 글씨 라임색 */
+    box-shadow: 0 0 10px rgba(206, 255, 0, 0.3);
+    /* 살짝 빛나기 */
+}
+
+/* 4. 클릭해서 선택된 상태 (Active) */
+.filter-btn.active {
+    background: #ceff00;
+    /* 배경 꽉 찬 라임색 */
+    border-color: #ceff00;
+    color: #000;
+    /* 글씨는 검정 (잘 보이게) */
+    font-weight: 800;
+    box-shadow: 0 0 15px rgba(206, 255, 0, 0.6);
+    /* 강하게 빛나기 */
+}
+
+/* 5. 리셋(새로고침) 버튼 */
+#reset-btn {
+    width: 40px;
+    /* 동그랗게 만들기 위해 */
+    height: 40px;
+    padding: 0;
+    /* 안쪽 여백 제거 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    /* 완전 원형 */
+    font-size: 1.2rem;
+}
+
+/* 2. 갤러리 틀 (바둑판 배열) */
+.media-slider {
+    /* 기존 슬라이더 속성 강제 초기화 */
+    display: grid !important;
+
+    /* PC: 한 줄에 4~5개 / 모바일: 화면 크기에 맞춰 자동 조절 */
+    /* minmax(220px, 1fr) -> 사진 크기를 적당히(220px) 키움 */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+
+    gap: 10px !important;
+    /* 사진 사이 간격 */
+    width: 100% !important;
+    height: auto !important;
+    /* 높이 제한 해제 (납작해짐 방지) */
+
+    overflow: visible !important;
+    /* 스크롤은 브라우저 전체 스크롤을 씀 */
+    white-space: normal !important;
+    /* 한 줄 서기 금지 */
+    padding: 0 10px 50px 10px;
+    /* 양옆 여백 살짝 */
+}
+
+/* 3. 사진 카드 (정사각형) */
+.media-item {
+    position: relative;
+    display: block !important;
+    width: 100% !important;
+    aspect-ratio: 1 / 1 !important;
+    /* ★무조건 1:1 정사각형★ */
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 !important;
+    border: 1px solid #222;
+    /* 얇은 테두리 */
+}
+
+/* 4. 이미지 (찌그러짐 방지) */
+.media-item img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    /* 칸에 꽉 차게 (비율 유지) */
+    transition: transform 0.3s ease;
+    display: block;
+    /* 하단 미세한 공백 제거 */
+}
+
+/* (보너스) 마우스 올리면 확대 */
+.media-item:hover img {
+    transform: scale(1.1);
+}
+
+/* 5. 텍스트 오버레이 (사진 위에 글씨) */
+.media-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: #fff;
+    padding: 10px;
+    font-size: 0.9rem;
+    opacity: 0;
+    /* 평소엔 숨김 */
+    transition: opacity 0.3s ease;
+}
+
+.media-item:hover .media-overlay {
+    opacity: 1;
+    /* 마우스 올리면 보임 */
+}
+
+/* ================================================== */
+/* [인트로 최종_진짜_완전_최종.css] 그리드 겹치기 */
+/* ================================================== */
+
+/* 1. 인트로 화면 (감옥 건물) */
+#intro-screen {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 99999;
+
+    /* ★핵심 변경★: Flex 대신 Grid 사용 */
+    display: grid !important;
+
+    /* 모든 죄수(글자)를 정중앙 감옥방 하나에 가둠 */
+    place-items: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+/* 2. 인트로 화면 안의 모든 요소 (죄수들) */
+/* p태그든 div태그든 상관없이 */
+#intro-screen>* {
+    /* ★핵심 명령★: 너네는 모두 '1행 1열'에 있어라! */
+    grid-area: 1 / 1 / 2 / 2 !important;
+
+    /* 크기 및 정렬 강제 */
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    text-align: center !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
+
+    /* 혹시 모를 위치 이동(transform) 초기화 */
+    transform: none !important;
+    position: relative !important;
+    /* absolute 필요 없음 */
 }
